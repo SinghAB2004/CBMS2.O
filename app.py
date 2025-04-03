@@ -1,3 +1,4 @@
+import os
 import logging
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
@@ -17,7 +18,6 @@ from google.oauth2 import id_token
 from pip._vendor import cachecontrol
 from models import User, init_user_db, get_user
 from auth import GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET
-import os
 import pathlib
 import requests
 import sqlite3
