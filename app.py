@@ -3,7 +3,11 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(leve
 
 from flask import Flask, request, send_file, render_template, g, redirect, url_for, session, abort, jsonify
 
-app = Flask(__name__)
+app = Flask(__name__,
+    template_folder=os.path.abspath(os.path.join(os.path.dirname(__file__), 'templates')),
+    static_folder=os.path.abspath(os.path.join(os.path.dirname(__file__), 'static'))
+)
+app.secret_key = os.urandom(24)
 app.logger.setLevel(logging.DEBUG)
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 import google.oauth2.credentials
@@ -23,9 +27,6 @@ from flask_cors import CORS
 import traceback
 from datetime import datetime
 
-# Initialize Flask app
-app = Flask(__name__)
-app.secret_key = os.urandom(24)  # Generate a secure secret key
 CORS(app, resources={
     r"/*": {
         "origins": "http://localhost:5000",

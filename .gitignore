@@ -84,3 +84,6 @@ htmlcov/
 .pytest_cache/
 coverage.xml
 *.cover
+
+# Dependencies
+node_modules/

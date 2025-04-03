@@ -2,7 +2,10 @@ services:
   - type: web
     name: cbms
     env: python
-    buildCommand: pip install -r requirements.txt
+    buildCommand: |
+      pip install -r requirements.txt
+      mkdir -p /opt/render/project/src/templates
+      cp -r templates/* /opt/render/project/src/templates/
     startCommand: gunicorn app:app
     region: singapore
     plan: free
@@ -18,6 +21,14 @@ services:
       - key: GOOGLE_CLIENT_ID
         sync: false
       - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: STORAGE_BUCKET_NAME
+        value: cbms-storage
+      - key: STORAGE_LOCATION
+        value: asia-south1
+      - key: GOOGLE_CLOUD_PROJECT
+        value: cloud-based-media-storage
+      - key: GOOGLE_APPLICATION_CREDENTIALS
         sync: false
     healthCheckPath: /
     autoDeploy: true
